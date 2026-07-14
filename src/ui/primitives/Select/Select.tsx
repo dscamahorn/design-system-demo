@@ -39,6 +39,7 @@ export function SelectField<T extends object>({
     <Select className={classNames} {...props}>
       <Field>
         {label && <Label>{label}</Label>}
+        {description && <Description>{description}</Description>}
         <RACButton className="select">
           <RACSelectValue className="select-value" />
           <IconChevronDown aria-hidden="true" />
@@ -46,7 +47,6 @@ export function SelectField<T extends object>({
         <RACPopover>
           <ListBox items={items}>{children}</ListBox>
         </RACPopover>
-        {description && <Description>{description}</Description>}
         <FieldError>{errorMessage}</FieldError>
       </Field>
     </Select>

@@ -28,8 +28,8 @@
   display: grid;
   grid-template-areas:
     "field-label field-extra"
-    "field-main field-main"
     "field-description field-description"
+    "field-main field-main"
     "field-error field-error";
   width: 100%;
 
@@ -53,7 +53,7 @@
 
   .description {
     grid-area: field-description;
-    margin-top: var(--field-row-gap);
+    margin-bottom: var(--field-row-gap);
   }
 
   .error-message {

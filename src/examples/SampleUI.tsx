@@ -42,25 +42,27 @@ export function SampleUI() {
             alt="User avatar"
             style={{ width: "var(--avatar-diameter)", flexShrink: 0 }}
           />
-          <SelectField
-            label="Label"
-            description="Lorem ipsum dolar sit"
-            aria-label="Label"
-            defaultSelectedKey="value-test"
-          >
-            <SelectItem id="value-test">Value test</SelectItem>
-            <SelectItem id="hello-world">Hello World</SelectItem>
-            <SelectItem id="option-2">Option 2</SelectItem>
-            <SelectItem id="option-3">Option 3</SelectItem>
-            <SelectItem id="option-4">Option 4</SelectItem>
-            <SelectItem id="option-5">Option 5</SelectItem>
-          </SelectField>
-          <ButtonDanger
-            variant="danger-primary"
-            onPress={() => console.log("Doug WAS here")}
-          >
-            Doug WAS here
-          </ButtonDanger>
+          <Flex direction="column" gap="400" alignSecondary="stretch">
+            <SelectField
+              label="Label"
+              description="Lorem ipsum dolar sit"
+              aria-label="Label"
+              defaultSelectedKey="value-test"
+            >
+              <SelectItem id="value-test">Value test</SelectItem>
+              <SelectItem id="hello-world">Hello World</SelectItem>
+              <SelectItem id="option-2">Option 2</SelectItem>
+              <SelectItem id="option-3">Option 3</SelectItem>
+              <SelectItem id="option-4">Option 4</SelectItem>
+              <SelectItem id="option-5">Option 5</SelectItem>
+            </SelectField>
+            <ButtonDanger
+              variant="danger-primary"
+              onPress={() => console.log("Doug WAS here")}
+            >
+              Doug WAS here
+            </ButtonDanger>
+          </Flex>
         </Flex>
       </Card>
     </Flex>
