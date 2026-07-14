@@ -75,7 +75,7 @@
 
 .label {
   color: var(--field-label-color);
-  font: var(--sds-font-body-base);
+  font: var(--global-font-body-bold);
 }
 
 .description {
