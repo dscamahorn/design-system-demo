@@ -2,8 +2,13 @@
   "name": "design-system-demo",
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
   },
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+  "forwardPorts": [8000, 6006, 9223, 9224, 9225, 9226, 9227, 9228, 9229, 9230, 9231, 9232],
   "customizations": {
     "vscode": {
       "extensions": [
