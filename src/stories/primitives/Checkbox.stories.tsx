@@ -1,5 +1,5 @@
-import { useArgs } from "@storybook/preview-api";
-import type { Meta, StoryObj } from "@storybook/react";
+import { useArgs } from "storybook/preview-api";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Checkbox, CheckboxField, CheckboxGroup } from "primitives";
 
 const meta: Meta<typeof Checkbox> = {

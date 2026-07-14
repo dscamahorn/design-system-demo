@@ -7,7 +7,7 @@
       "version": "22"
     }
   },
-  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && grep -qF 'design-system-demo: auto-load project .env' ~/.bashrc || printf '\\n# design-system-demo: auto-load project .env (e.g. FIGMA_ACCESS_TOKEN) so it is\\n# available for .mcp.json variable expansion when the claude CLI launches.\\nif [ -f \"${containerWorkspaceFolder}/.env\" ]; then\\n    set -a\\n    . \"${containerWorkspaceFolder}/.env\"\\n    set +a\\nfi\\n' >> ~/.bashrc",
   "forwardPorts": [8000, 6006, 9223, 9224, 9225, 9226, 9227, 9228, 9229, 9230, 9231, 9232],
   "customizations": {
     "vscode": {

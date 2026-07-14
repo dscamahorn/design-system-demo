@@ -4,7 +4,6 @@ build/
 storybook-static/
 .env
 .env.local
-.mcp.json
 .DS_Store
 *.log
 .figma-console-mcp-plugin/

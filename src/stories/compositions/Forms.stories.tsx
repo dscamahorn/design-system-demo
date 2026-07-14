@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { FormBox } from "compositions";
 import { Button, ButtonGroup, CheckboxField, InputField } from "primitives";
 

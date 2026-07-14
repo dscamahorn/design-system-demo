@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import { Flex, FlexItem, Section } from "layout";
 import {
   Logo,
@@ -49,13 +49,13 @@ export const StoryHello: StoryObj<{}> = {
 
             <TextLinkList density="tight">
               <TextListItem>
-                <TextLink href="https://github.com/figma/sds">
-                  GitHub SDS Repo
+                <TextLink href="https://github.com/dscamahorn/design-system-demo">
+                  GitHub Repo
                 </TextLink>
               </TextListItem>
               <TextListItem>
-                <TextLink href="https://www.figma.com/community/file/1380235722331273046">
-                  Figma Community File
+                <TextLink href="https://www.figma.com/design/r2laq9NyigGR0KZpc05sQm/design-system-demo-sds">
+                  Figma Design System File
                 </TextLink>
               </TextListItem>
             </TextLinkList>
