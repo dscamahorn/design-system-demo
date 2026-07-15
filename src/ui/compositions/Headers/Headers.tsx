@@ -78,6 +78,7 @@ export function HeaderAuth() {
           {item}
         </NavigationPill>
       ))}
+      <NavigationPill href="/sample-ui.html">Sample UI</NavigationPill>
     </Navigation>
   );
 

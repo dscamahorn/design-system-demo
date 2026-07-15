@@ -21,19 +21,23 @@ export const Button = React.forwardRef(function Button(
     `button-variant-${variant}`,
   );
 
-  const { style, ...sharedProps } = props;
+  if (isAnchorProps(props)) {
+    const { style, ...anchorProps } = props;
+    return (
+      <RACLink
+        {...anchorProps}
+        className={classNames}
+        ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+      >
+        {props.children}
+      </RACLink>
+    );
+  }
 
-  return isAnchorProps(props) ? (
-    <RACLink
-      {...sharedProps}
-      className={classNames}
-      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-    >
-      {props.children}
-    </RACLink>
-  ) : (
+  const { style, ...buttonProps } = props;
+  return (
     <RACButton
-      {...sharedProps}
+      {...(buttonProps as ComponentPropsWithoutRef<typeof RACButton>)}
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
@@ -67,19 +71,23 @@ export const ButtonDanger = React.forwardRef(function Button(
     `button-variant-${variant}`,
   );
 
-  const { style, ...sharedProps } = props;
+  if (isAnchorProps(props)) {
+    const { style, ...anchorProps } = props;
+    return (
+      <RACLink
+        {...anchorProps}
+        className={classNames}
+        ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+      >
+        {props.children}
+      </RACLink>
+    );
+  }
 
-  return isAnchorProps(props) ? (
-    <RACLink
-      {...sharedProps}
-      className={classNames}
-      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-    >
-      {props.children}
-    </RACLink>
-  ) : (
+  const { style, ...buttonProps } = props;
+  return (
     <RACButton
-      {...sharedProps}
+      {...(buttonProps as ComponentPropsWithoutRef<typeof RACButton>)}
       className={classNames}
       ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
