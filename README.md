@@ -2,6 +2,10 @@
 
 SDS (Simple Design System) is a React + TypeScript component library with deep Figma Code Connect integration — both a design system and a demo of Figma MCP-driven, design-to-code workflows.
 
+## Demo
+
+[Swapping a danger button for a stacked Cancel/Okay button group — code and Figma updated together from a single prompt.](https://share.probableminds.ai/SzzMKQBzZhBnsTyqzk6x)
+
 ## Getting started
 
 The recommended path is VS Code + Dev Containers, which matches how this repo is actually developed and requires no local Node install. A manual path is included as an alternative.

@@ -2,7 +2,8 @@ import { IconMoon, IconSun } from "icons";
 import { Flex } from "layout";
 import {
   Avatar,
-  ButtonDanger,
+  Button,
+  ButtonGroup,
   IconButton,
   SelectField,
   SelectItem,
@@ -56,12 +57,14 @@ export function SampleUI() {
               <SelectItem id="option-4">Option 4</SelectItem>
               <SelectItem id="option-5">Option 5</SelectItem>
             </SelectField>
-            <ButtonDanger
-              variant="danger-primary"
-              onPress={() => console.log("Doug WAS here")}
-            >
-              Doug WAS here
-            </ButtonDanger>
+            <ButtonGroup align="stack">
+              <Button variant="neutral" onPress={() => console.log("Cancel")}>
+                Cancel
+              </Button>
+              <Button variant="primary" onPress={() => console.log("Okay")}>
+                Okay
+              </Button>
+            </ButtonGroup>
           </Flex>
         </Flex>
       </Card>
