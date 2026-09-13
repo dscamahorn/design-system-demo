@@ -56,14 +56,14 @@ The repo is both the component library and two small demo apps built from it:
 
 Each milestone ends with something that can be run and seen working.
 
-### Milestone 1: Dev container runs the project — done
+### Milestone 1: Dev container runs the project (done)
 
 - Colima plus a VS Code dev container with Node, git, the GitHub CLI, and
   Claude Code inside it.
 - **Result:** `npm run app:dev` serves the SDS marketing demo at
   `localhost:8000` from inside the container.
 
-### Milestone 2: SDS imported and Figma MCP wired up — done
+### Milestone 2: SDS imported and Figma MCP wired up (done)
 
 - SDS source imported into the repo. Storybook lists every primitive,
   composition, and layout component.
@@ -73,7 +73,7 @@ Each milestone ends with something that can be run and seen working.
 - **Result:** Claude Code can read a node from the `design-system-demo-sds`
   or `design-system-demo-website` file and describe it.
 
-### Milestone 3: Sample UI generated from Figma — done
+### Milestone 3: Sample UI generated from Figma (done)
 
 - `src/examples/SampleUI.tsx` generated from the website Figma file using
   only existing SDS components: `Card`, `Avatar`, `SelectField`,
@@ -85,7 +85,7 @@ Each milestone ends with something that can be run and seen working.
 - **Result:** `localhost:8000/sample-ui.html` matches the Figma design, and
   the README links a recording of the round-trip change.
 
-### Milestone 4: Repo aligned with the global project conventions — done
+### Milestone 4: Repo aligned with the global project conventions (done)
 
 - This PRD, an architecture document with Mermaid diagrams
   (`ARCHITECTURE.md`), and code-style and stack notes in `CLAUDE.md`.
@@ -103,21 +103,21 @@ Each milestone ends with something that can be run and seen working.
 - **Result:** a new contributor can read the three docs and understand what
   the project is, how it is built, and which files they may change.
 
-### Milestone 5: Publish Code Connect — next
+### Milestone 5: Publish Code Connect (next)
 
 - Run `npx figma connect publish` so Figma Dev Mode shows the real React
   source for each SDS component instead of generic CSS.
 - **Result:** selecting a Button in the SDS Figma file shows
   `src/ui/primitives/Button/Button.tsx` usage in the Dev Mode panel.
 
-### Milestone 6: Restore the GitHub Pages deploy — next
+### Milestone 6: Restore the GitHub Pages deploy (next)
 
 - Bring back the GitHub Actions workflow that builds the app and Storybook
   and publishes `dist/` to GitHub Pages.
 - **Result:** both demos and Storybook are reachable at a public URL that
   updates on every push to `main`.
 
-### Milestone 7: Second Figma-to-code example — later
+### Milestone 7: Second Figma-to-code example (later)
 
 - Pick a larger frame from the website file (for example a settings page)
   and implement it the same way as the Sample UI, including the data layer
