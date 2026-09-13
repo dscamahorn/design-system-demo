@@ -6,6 +6,12 @@ SDS (Simple Design System) is a React + TypeScript component library with deep F
 
 [Swapping a danger button for a stacked Cancel/Okay button group — code and Figma updated together from a single prompt.](https://share.probableminds.ai/SzzMKQBzZhBnsTyqzk6x)
 
+## Project docs
+
+- `PRD.md` — what the project is for, its constraints, and the milestone list.
+- `ARCHITECTURE.md` — Mermaid diagrams of the repo layout, the build, the Figma-to-code loop, and the dev environment.
+- `CLAUDE.md` — working rules, including which files are generated, which are upstream SDS code, and which are ours.
+
 ## Getting started
 
 The recommended path is VS Code + Dev Containers, which matches how this repo is actually developed and requires no local Node install. A manual path is included as an alternative.
@@ -22,9 +28,10 @@ The recommended path is VS Code + Dev Containers, which matches how this repo is
    code design-system-demo
    ```
 3. **Reopen in container**: VS Code should prompt automatically; otherwise open the Command Palette (`Cmd/Ctrl+Shift+P`) → **Dev Containers: Reopen in Container**.
-   - This builds from a Node 22 base image (`.devcontainer/devcontainer.json`), installs the GitHub CLI feature, installs the Claude Code CLI, and forwards the ports used by the app, Storybook, and the Figma console MCP bridge (8000, 6006, 9223–9232).
-   - It also installs the [GitHub Pull Requests extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) (`GitHub.vscode-pull-request-github`) inside the container.
-4. Once the container is up, open a terminal in VS Code, run `npm install`, then continue with the "Run it" commands below.
+   - This uses Microsoft's `javascript-node:22-bookworm` Dev Container image (`.devcontainer/devcontainer.json`), adds the GitHub CLI feature, bind-mounts your `~/.claude` folder so Claude Code sees your global rules and login, and forwards the ports used by the app, Storybook, and the Figma console MCP bridge (8000, 6006, 9223–9232).
+   - `.devcontainer/post-create.sh` then runs `npm install`, installs the Claude Code CLI, and sets bash and zsh up to load `.env`.
+   - It also installs the Claude Code, ESLint, Prettier, and [GitHub Pull Requests](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github) extensions inside the container, with format-on-save turned on.
+4. Once the container is up, open a terminal in VS Code and continue with the "Run it" commands below. Dependencies are already installed.
 
 ### Option B: Manual setup
 
@@ -45,7 +52,7 @@ npm run app:dev       # http://localhost:8000 — marketing-site demo (/) and Sa
 npm run storybook     # http://localhost:6006 — component-by-component docs and visual review
 ```
 
-No test runner is configured — correctness is verified via `npm run app:build` (runs `tsc`), `npm run app:lint`, and Storybook visual review.
+No test runner is configured — correctness is verified via `npm run app:build` (runs `tsc`), `npm run app:lint` (ESLint on the files this project owns; `npm run app:lint:all` runs it on the upstream SDS code too), and Storybook visual review.
 
 ### Optional: Figma personal access token (PAT)
 
@@ -56,7 +63,7 @@ Needed for both the Figma sync scripts below and the `figma-console` MCP server 
 3. Give it a name (e.g. `design-system-demo`) and grant scopes for **Code Connect**, **Variables** (read), and **Dev resources** (read/write) — these are what `scripts/tokens`, `scripts/icons`, and `scripts/dev-resources` need.
 4. Copy the token immediately — Figma only shows it once.
 5. Copy `.env-rename` to `.env` and paste it in as `FIGMA_ACCESS_TOKEN`, along with the SDS file key (`FIGMA_FILE_KEY`, the `r2laq9NyigGR0KZpc05sQm` from the `design-system-demo-sds` URL above).
-   - In the Dev Container, `.env` is auto-loaded into the shell on startup (see `.devcontainer/devcontainer.json`'s `postCreateCommand`) so it's available for `.mcp.json`'s `${FIGMA_ACCESS_TOKEN}` variable expansion.
+   - In the Dev Container, `.env` is auto-loaded into the shell on startup (see `.devcontainer/post-create.sh`) so it's available for `.mcp.json`'s `${FIGMA_ACCESS_TOKEN}` variable expansion.
 
 ### Optional: Figma sync scripts
 
@@ -73,6 +80,14 @@ npm run script:dev-resources
 If you're using Claude Code or another MCP-aware tool to work on this repo with live Figma access, `.mcp.json` in the repo root already configures the `figma` (remote) and `figma-console` (local) MCP servers — the latter needs the `FIGMA_ACCESS_TOKEN` from above (it's referenced as `${FIGMA_ACCESS_TOKEN}`, not hardcoded, so the file is safe to check in and is tracked in git).
 
 **Current workflow**: day-to-day, changes are communicated between design and code using the remote `figma` MCP server together with the local `figma-console` MCP server, with the **Figma Desktop Bridge plugin running in both `design-system-demo-sds` and `design-system-demo-website`**. This gives an MCP-aware tool live read/write access to both files (inspecting nodes, variables, and components; pushing edits back) without needing either file to be exported or re-fetched. The Code Connect mapping in `figma.config.json` (see above) is configured and available as an alternative/complementary path — pointing Figma Dev Mode directly at the real React source per component — but it hasn't been published or relied on yet; everything so far has gone through the Desktop Bridge + MCP servers instead. See `CLAUDE.md` for the fuller workflow notes.
+
+## Deploy
+
+There is no deploy at the moment. The original SDS GitHub Pages workflow was removed during the Storybook upgrade, and restoring it is a planned milestone in `PRD.md`. To produce a static build locally:
+
+```bash
+npm run build    # app + Storybook -> dist/ (Storybook lands in dist/storybook)
+```
 
 ## Figma files
 
@@ -102,7 +117,8 @@ Both files are public — anyone can open them without requesting access, and ca
 Quick reference — see "Getting started" above for setup steps.
 
 - **Docker runtime**: [Colima](https://github.com/abiosoft/colima) locally; any Docker context works for the Dev Container.
-- **Dev Container config**: `.devcontainer/devcontainer.json` — Node 22 base image, GitHub CLI feature, GitHub Pull Requests VS Code extension, Claude Code CLI installed via `postCreateCommand`.
+- **Dev Container config**: `.devcontainer/devcontainer.json` — Microsoft `javascript-node:22-bookworm` image, GitHub CLI feature, `~/.claude` bind mount, Claude Code/ESLint/Prettier/GitHub Pull Requests VS Code extensions with format-on-save. `.devcontainer/post-create.sh` installs dependencies and the Claude Code CLI.
+- **Formatting and linting**: Prettier (`.prettierrc`, with the organize-imports plugin) and ESLint (`.eslintrc.cjs`), both as dev dependencies. Run `npm run app:lint` to lint; the editor formats on save.
 - **GitHub**: repo is connected via `gh`. See remote with `git remote -v`.
 - **Framework/package manager**: npm + Vite + React + TypeScript (see `package.json`).
 - **Figma MCP**: configured in `.mcp.json` (tracked in git — no secrets in it, just `${FIGMA_ACCESS_TOKEN}` variable expansion) — remote `figma` server plus local `figma-console` server. See `CLAUDE.md` for the workflow.
