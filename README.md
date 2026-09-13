@@ -118,7 +118,7 @@ Quick reference. See "Getting started" above for setup steps.
 
 - **Docker runtime**: [Colima](https://github.com/abiosoft/colima) locally; any Docker context works for the Dev Container.
 - **Dev Container config**: `.devcontainer/devcontainer.json`: Microsoft `javascript-node:22-bookworm` image, GitHub CLI feature, `~/.claude` bind mount, Claude Code/ESLint/Prettier/GitHub Pull Requests VS Code extensions with format-on-save. `.devcontainer/post-create.sh` installs dependencies and the Claude Code CLI.
-- **Formatting and linting**: Prettier (`.prettierrc`, with the organize-imports plugin) and ESLint (`.eslintrc.cjs`), both as dev dependencies. Run `npm run app:lint` to lint; the editor formats on save.
+- **Formatting and linting**: Prettier (`.prettierrc`, with the organize-imports plugin) and ESLint (`eslint.config.js`, flat config), both as dev dependencies. Run `npm run app:lint` to lint; the editor formats on save.
 - **GitHub**: repo is connected via `gh`. See remote with `git remote -v`.
 - **Framework/package manager**: npm + Vite + React + TypeScript (see `package.json`).
 - **Figma MCP**: configured in `.mcp.json` (tracked in git; no secrets in it, just `${FIGMA_ACCESS_TOKEN}` variable expansion): remote `figma` server plus local `figma-console` server. See `CLAUDE.md` for the workflow.
