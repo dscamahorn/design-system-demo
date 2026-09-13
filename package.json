@@ -7,7 +7,7 @@
     "app:dev": "vite",
     "app:build": "tsc && vite build",
     "app:lint": "eslint src/examples/SampleUI.tsx src/sample-ui-main.tsx --report-unused-disable-directives --max-warnings 0",
-    "app:lint:all": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "app:lint:all": "eslint \"**/*.{ts,tsx}\" --report-unused-disable-directives --max-warnings 0",
     "app:preview": "vite preview",
     "storybook": "storybook dev -p 6006 --no-open",
     "storybook:build": "storybook build --output-dir dist/storybook",
@@ -19,6 +19,7 @@
     "script:tokens:rest": "cd scripts/tokens; node --env-file=../../.env app.mjs; cd -;"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@figma/code-connect": "^1.4.9",
     "@react-types/shared": "^3.23.0",
     "@storybook/addon-docs": "^10.5.0",
@@ -27,14 +28,13 @@
     "@storybook/react-vite": "^10.5.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
     "clsx": "^2.1.1",
-    "eslint": "^8.45.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-storybook": "^10.5.0",
+    "globals": "^17.12.0",
     "prettier": "^3.9.6",
     "prettier-plugin-organize-imports": "^3.2.4",
     "react": "^18.2.0",
@@ -42,6 +42,7 @@
     "react-dom": "^18.2.0",
     "storybook": "^10.5.0",
     "typescript": "^5.0.2",
+    "typescript-eslint": "^8.70.0",
     "vite": "^6.3.5"
   }
 }
