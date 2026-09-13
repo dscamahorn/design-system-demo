@@ -1,6 +1,6 @@
 // This file has been automatically migrated to valid ESM format by Storybook.
-import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/react-vite";
+import { fileURLToPath } from "node:url";
 import path, { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -35,6 +35,14 @@ const config: StorybookConfig = {
         utils: path.resolve(__dirname, "/src/ui/utils"),
       };
     }
+
+    // The project folder is shared into the container from the Mac.
+    // Edits made on the Mac side do not send change notifications into
+    // the container, so Vite checks the files on a timer instead.
+    config.server = {
+      ...config.server,
+      watch: { usePolling: true, interval: 300 },
+    };
 
     return config;
   },

@@ -29,5 +29,12 @@ export default defineConfig({
   server: {
     port: 8000,
     host: true,
+    watch: {
+      // The project folder is shared into the container from the Mac.
+      // Edits made on the Mac side do not send change notifications into
+      // the container, so Vite checks the files on a timer instead.
+      usePolling: true,
+      interval: 300,
+    },
   },
 });
