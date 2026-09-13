@@ -50,7 +50,7 @@ To check a single component in isolation, open its story directly in Storybook r
 
 - **`src/ui/`** is the actual component library (this is what application code imports).
   - `primitives/` — atomic components (Button, Input, Select, Dialog, etc.), each in its own folder with a `.tsx` and a co-located `.css` file (e.g. `Button/Button.tsx` + `Button/button.css`). No CSS modules/styled-components — plain class names composed with `clsx`.
-  - `compositions/` — larger patterns assembled from primitives (Cards, Forms, Headers/Footers). Forms compositions are meant as *examples*, not a form-building abstraction.
+  - `compositions/` — larger patterns assembled from primitives (Cards, Forms, Headers/Footers). Forms compositions are meant as _examples_, not a form-building abstraction.
   - `layout/` — `Flex`, `Grid`, `Section`: the only sanctioned way to position things. Custom layout CSS is a smell in this codebase.
   - `icons/` — one file per Feather-style icon, generated/synced from Figma (do not hand-edit; re-run `script:icons`).
   - `hooks/`, `utils/`, `images/` — supporting pieces (`useMediaQuery` is the main responsive hook).
@@ -88,6 +88,7 @@ All design tokens live as CSS custom properties in `src/theme.css`, synced from 
 ### Figma MCP / Code Connect workflow
 
 When implementing a Figma design in this repo (via the `figma` or `figma-console` MCP tools):
+
 1. Extract the design with the Figma MCP tools first — don't guess at layout/content.
 2. Map Figma components to existing `src/ui` primitives/compositions/layouts using the `codeDependencies` field from the MCP response; only fall back to something new if no existing component fits, and confirm with the user first.
 3. Read the actual `.tsx` files for real prop names before writing JSX — don't assume prop names from the Figma layer names (e.g. it's `isSelected`, not `active`).
@@ -100,5 +101,5 @@ When implementing a Figma design in this repo (via the `figma` or `figma-console
 ## Environment
 
 - Dev container: Microsoft's `javascript-node:22-bookworm` image plus the GitHub CLI feature (`.devcontainer/devcontainer.json`), Docker runtime via Colima. The host's `~/.claude` is bind-mounted to `/home/node/.claude` so the global CLAUDE.md and the Claude login are available inside. `.devcontainer/post-create.sh` runs `npm install`, installs the Claude Code CLI into `~/.local/bin`, and makes bash and zsh load `.env`. Everything (git, `gh`, `claude`, builds) runs inside the container.
-- `.mcp.json` (gitignored) configures the `figma` (remote HTTP) and `figma-console` (local, via `npx figma-console-mcp`) MCP servers; the latter needs a `FIGMA_ACCESS_TOKEN`.
+- `.mcp.json` (tracked in git; it holds no secrets) configures the `figma` (remote HTTP), `figma-console` (local, via `npx figma-console-mcp`), and `design-systems-mcp` (remote HTTP) MCP servers. `figma-console` reads `FIGMA_ACCESS_TOKEN` from the environment, which the dev container loads from the gitignored `.env`.
 - Figma sync scripts (`scripts/tokens`, `scripts/icons`, `scripts/dev-resources`) read Figma credentials from `.env` via `node --env-file`.
