@@ -1,20 +1,58 @@
 {
+  // VS Code Dev Container for design-system-demo.
+  // Open the Command Palette and choose "Dev Containers: Reopen in Container".
+  // Everything runs in here: editing, terminal, git, builds, the dev server,
+  // and Claude Code. Nothing needs to be installed on the Mac beyond Colima
+  // and VS Code.
   "name": "design-system-demo",
-  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
+
+  // Microsoft's Dev Container image for JavaScript/TypeScript work. It ships
+  // Node 22, git, zsh, and a working global npm for the "node" user.
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "22"
-    }
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && grep -qF 'design-system-demo: auto-load project .env' ~/.bashrc || printf '\\n# design-system-demo: auto-load project .env (e.g. FIGMA_ACCESS_TOKEN) so it is\\n# available for .mcp.json variable expansion when the claude CLI launches.\\nif [ -f \"${containerWorkspaceFolder}/.env\" ]; then\\n    set -a\\n    . \"${containerWorkspaceFolder}/.env\"\\n    set +a\\nfi\\n' >> ~/.bashrc",
-  "forwardPorts": [8000, 6006, 9223, 9224, 9225, 9226, 9227, 9228, 9229, 9230, 9231, 9232],
+
+  // Make the Mac's ~/.claude folder visible inside the container so Claude
+  // Code can read the global CLAUDE.md and keep its login across rebuilds.
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/node/.claude,type=bind"
+  ],
+
+  // Installs npm dependencies and the Claude Code CLI, and wires up .env
+  // loading for the shell. See the script for the details.
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  // 8000 is the Vite dev server, 6006 is Storybook, and 9223-9232 is the
+  // port range the Figma Desktop Bridge plugin uses to reach the local
+  // figma-console MCP server running in this container.
+  "forwardPorts": [
+    8000, 6006, 9223, 9224, 9225, 9226, 9227, 9228, 9229, 9230, 9231, 9232
+  ],
+  "portsAttributes": {
+    "8000": { "label": "Vite dev server" },
+    "6006": { "label": "Storybook" }
+  },
+
   "customizations": {
     "vscode": {
+      // Extensions installed on the Mac do not carry into the container;
+      // only the ones listed here get installed inside it.
       "extensions": [
+        "anthropic.claude-code",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
         "GitHub.vscode-pull-request-github"
-      ]
+      ],
+      // Format every file with Prettier when it is saved.
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
     }
   },
-  "remoteUser": "vscode"
+
+  // Run as the non-root "node" user that the image ships with.
+  "remoteUser": "node"
 }
