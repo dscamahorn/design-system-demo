@@ -59,11 +59,11 @@ flowchart TB
 
 ### The three kinds of source files
 
-| Kind | Where | Who changes it |
-| --- | --- | --- |
-| Generated | `src/ui/icons/`, `src/theme.css` | Only the sync scripts. Never hand-edit. |
+| Kind         | Where                                                                                                                     | Who changes it                                   |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| Generated    | `src/ui/icons/`, `src/theme.css`                                                                                          | Only the sync scripts. Never hand-edit.          |
 | Upstream SDS | Everything else under `src/ui/`, `src/data/`, `src/figma/`, `src/stories/`, and the marketing sections in `src/examples/` | Left as written. Touch only for necessary fixes. |
-| Ours | `src/examples/SampleUI.tsx`, `src/examples/sample-ui-theme.css`, `src/sample-ui-main.tsx`, `sample-ui.html` | Follows the global code-style rules. |
+| Ours         | `src/examples/SampleUI.tsx`, `src/examples/sample-ui-theme.css`, `src/sample-ui-main.tsx`, `sample-ui.html`               | Follows the global code-style rules.             |
 
 ## Build and run
 

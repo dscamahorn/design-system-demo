@@ -85,7 +85,7 @@ Each milestone ends with something that can be run and seen working.
 - **Result:** `localhost:8000/sample-ui.html` matches the Figma design, and
   the README links a recording of the round-trip change.
 
-### Milestone 4: Repo aligned with the global project conventions — in progress
+### Milestone 4: Repo aligned with the global project conventions — done
 
 - This PRD, an architecture document with Mermaid diagrams
   (`ARCHITECTURE.md`), and code-style and stack notes in `CLAUDE.md`.
