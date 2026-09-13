@@ -12,6 +12,10 @@
         "ENABLE_MCP_APPS": "true",
         "FIGMA_WS_HOST": "0.0.0.0"
       }
+    },
+    "design-systems-mcp": {
+      "type": "http",
+      "url": "https://design-systems-mcp.southleft.com/mcp"
     }
   }
 }
